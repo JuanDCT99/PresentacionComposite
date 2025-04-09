@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.composite_universidadexample.Model;
 
-public interface MiembroUniversitario {
+public interface MiembroUniversitario extends Cloneable {
+    void mostrarInfo();
+    MiembroUniversitario clone();
 
-    public void mostrarInfo();
 }

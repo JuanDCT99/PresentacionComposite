@@ -1,26 +1,28 @@
 package co.edu.uniquindio.poo.composite_universidadexample.Model;
 
-import java.util.LinkedList;
+import java.util.List;
+import java.util.ArrayList;
 
-public class Docente extends Persona implements MiembroUniversitario{
+public class Docente extends Persona implements MiembroUniversitario {
 
-    private double Sueldo;
+    private double sueldo;
     private String especialidad;
-    private LinkedList<String> materiasAsignadas;
+    private List<String> materiasAsignadas;
 
-    public Docente(String nombre, String id, int edad, Enum cargo, String correo, double sueldo, String especialidad, LinkedList<String> materiasAsignadas) {
-        super(nombre, id, edad, cargo, correo);
-        this.Sueldo = sueldo;
+    public Docente(String nombre, String apellido, String id, int edad, Enum cargo, String correo,
+                   double sueldo, String especialidad, List<String> materiasAsignadas) {
+        super(nombre, apellido, id, edad, cargo, correo);
+        this.sueldo = sueldo;
         this.especialidad = especialidad;
         this.materiasAsignadas = materiasAsignadas;
     }
 
     public double getSueldo() {
-        return Sueldo;
+        return sueldo;
     }
 
     public void setSueldo(double sueldo) {
-        Sueldo = sueldo;
+        this.sueldo = sueldo;
     }
 
     public String getEspecialidad() {
@@ -31,25 +33,47 @@ public class Docente extends Persona implements MiembroUniversitario{
         this.especialidad = especialidad;
     }
 
-    public LinkedList<String> getMateriasAsignadas() {
+    public List<String> getMateriasAsignadas() {
         return materiasAsignadas;
     }
 
-    public void setMateriasAsignadas(LinkedList<String> materiasAsignadas) {
+    public void setMateriasAsignadas(List<String> materiasAsignadas) {
         this.materiasAsignadas = materiasAsignadas;
+    }
+
+    public void agregarMateria(String materia) {
+        materiasAsignadas.add(materia);
+    }
+
+    @Override
+    public void mostrarInfo() {
+        System.out.println("Docente: " + getNombre() + " " + getApellido());
+        System.out.println("Especialidad: " + especialidad);
+        System.out.println("Sueldo: " + sueldo);
+        System.out.println("Materias asignadas: ");
+        for (String materia : materiasAsignadas) {
+            System.out.println("- " + materia);
+        }
     }
 
     @Override
     public String toString() {
         return "Docente{" +
-                "Sueldo=" + Sueldo +
+                "nombre='" + getNombre() + '\'' +
+                ", apellido='" + getApellido() + '\'' +
                 ", especialidad='" + especialidad + '\'' +
+                ", sueldo=" + sueldo +
                 ", materiasAsignadas=" + materiasAsignadas +
                 '}';
     }
 
     @Override
-    public void mostrarInfo() {
-        
+    public Docente clone() {
+        Docente clon = (Docente) super.clone();
+        clon.materiasAsignadas = new ArrayList<>(this.materiasAsignadas);
+        return clon;
     }
+
+
+
 }
